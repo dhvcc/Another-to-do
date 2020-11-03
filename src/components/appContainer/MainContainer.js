@@ -46,12 +46,24 @@ class MainContainer extends Component {
         this.setState(newState)
     }
 
+    handleDeleteItem = (index) => {
+        let newState = {...this.state};
+
+        const item_ind = newState.items.findIndex((item) => item.index === index)
+        newState.items.splice(item_ind, 1)
+
+        localStorage.setItem("another-to-do", JSON.stringify(newState))
+        this.setState(newState)
+    }
+
     render() {
         return (
             <div className={'col-6'}>
                 <h2>To-do</h2>
                 <hr className={'mb-3'}/>
-                <ListContainer items={this.state.items} handleUpdateItems={this.handleUpdateItems}/>
+                <ListContainer items={this.state.items}
+                               handleUpdateItems={this.handleUpdateItems}
+                               handleDeleteItem={this.handleDeleteItem}/>
                 <TaskInput handleUpdateItems={this.handleUpdateItems}/>
             </div>
         );
