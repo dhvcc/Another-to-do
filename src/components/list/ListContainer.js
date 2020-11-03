@@ -2,31 +2,16 @@ import React, {Component} from 'react';
 import ListElement from "./ListElement";
 
 class ListContainer extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            "items": [
-                {
-                    "check": false,
-                    "text": "textu",
-                },
-                {
-                    "check": true,
-                    "text": "textu 2",
-                }
-            ]
-        }
-    }
-
     render() {
-        const {items} = this.state;
+        const {items, handleUpdateItems} = this.props;
 
         return (
-            <ul className={'list-group'}>
-                {items.map((item) => {
-                    return <ListElement check={item.check} text={item.text}/>
-                })}
+            <ul className={'list-group'}> {
+                items.map((item) => {
+                    return <ListElement key={item.index} index={item.index} check={item.check} text={item.text}
+                                        updateHandler={handleUpdateItems}/>
+                })
+            }
             </ul>
         );
     }
